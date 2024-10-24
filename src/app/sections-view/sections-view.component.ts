@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {NewSectionFormType} from '../../interfaces/forms.interface';
 import { SectionDetailsComponent } from '../section-details/section-details.component';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'app-sections-view',
@@ -11,11 +12,11 @@ import { SectionDetailsComponent } from '../section-details/section-details.comp
   styleUrl: './sections-view.component.css'
 })
 export class SectionsViewComponent {
-  sections: Array<NewSectionFormType>;
   newSectionForm: FormGroup;
   sectionDetails: boolean = false;
   sectionDetailsId: number = 0;
   view = false; 
+  dashboardService: DashboardService = inject(DashboardService);
 
   constructor() {
     this.newSectionForm = new FormGroup({
@@ -24,16 +25,14 @@ export class SectionsViewComponent {
       sectionDescription: new FormControl('')
     })
 
-    this.sections = [];
   }
 
   onSubmit() {
     const values = this.newSectionForm.value;
 
-    console.log(this.newSectionForm.value);
+    this.dashboardService.addSection({...values, id: this.dashboardService.getSectionsCount() + 1});
 
-    this.sections.push({...values, id: this.sections.length + 1});
-    console.log(this.sections);
+    console.log(this.dashboardService.getAllSections());
   }
 
   onSectionClick(id: number) {

@@ -9,7 +9,7 @@ import { NewSectionFormType } from '../../interfaces/forms.interface';
   styleUrl: './section-details.component.css'
 })
 export class SectionDetailsComponent {
-  @Input() sectionObject!: NewSectionFormType;
+  @Input() sectionObject!: NewSectionFormType | undefined;
   @Output() backSectionEvent = new EventEmitter<boolean>(false);
 
   returnSection() {

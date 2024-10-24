@@ -1,8 +1,60 @@
 <button (click)="returnSection()" class="btn btn-primary">Back to Sections</button>
 <div class="card section-details-card">
   <div class="card-body">
-    <h5 class="card-title">{{sectionObject.sectionName}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Floor: {{sectionObject.sectionFloor}}</h6>
-    <p class="card-text">Section Id: {{sectionObject.id}}</p>
+    <h5 class="card-title">{{sectionObject?.sectionName}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Floor: {{sectionObject?.sectionFloor}}</h6>
+    <p class="card-text">Id: {{sectionObject?.id}}</p>
+    <p class="card-text">Description: {{sectionObject?.sectionDescription}}</p>
   </div>
+</div>
+<div class="row mt-5">
+  <div class="col-md-6 col-sm-12 d-flex justify-content-center">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-center mb-3">
+          Tasks
+        </h5>
+        <ul class="list-unstyled">
+          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
+          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
+          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
+          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-12 d-flex justify-content-center">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-center mb-3">
+          Recurring Tasks
+        </h5>
+        <ul class="list-unstyled">
+          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
+          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
+          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
+          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mt-5">
+  <form>
+    <div class="form-group">
+      <label for="section-id">Section id</label>
+      <input disabled id="task-name" value="5"/>
+    </div>
+    <div class="form-group">
+      <label for="task-name">Task Name</label>
+      <input id="task-name"/>
+    </div>
+    <div class="form-group">
+      <p>Recurring?</p>
+      <input type="radio" id="yes" name="yes"/>
+      <label for="yes">Yes</label>
+      <input type="radio" id="no" name="no"/>
+      <label for="no">No</label>
+    </div>
+  </form>
 </div>

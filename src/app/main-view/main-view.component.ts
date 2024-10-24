@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'app-main-view',
@@ -9,6 +10,7 @@ import { Component } from '@angular/core';
 })
 export class MainViewComponent {
   counter: number = 0;
+  dashboardService: DashboardService = inject(DashboardService);
 
   incrementCounter() {
     this.counter++;
