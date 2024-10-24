@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+section.login-container {
+  max-width: 500px;
+  min-height: 300px;
+}
+
+button.login-btn {
+  margin-top: 10px;
+}
+
+.center-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

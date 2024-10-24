@@ -1,0 +1,50 @@
+<div class="container">
+  @if(sectionDetails) {
+    <app-section-details (backSectionEvent)="returnSection($event)" [sectionObject]="sections[sectionDetailsId-1]"></app-section-details>
+  } @else {
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Section</th>
+          <th scope="col">Floor</th>
+          <th scope="col">Description</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(section of sections; track section) {
+          <tr>
+            <th scope="row">{{section.id}}</th>
+            <td scope="row">{{section.sectionName}}</td>
+            <td scope="row">{{section.sectionFloor}}</td>
+            <td scope="row">{{section.sectionDescription}}</td>
+            <td scope="row"><button (click)="onSectionClick(section.id)" class="btn btn-info">View</button></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <div class="new-section-form-container">
+      <form (ngSubmit)="onSubmit()" [formGroup]="newSectionForm" >
+        <div class="form-group">
+          <label for="section-name">Section Name</label>
+          <input type="text" class="form-control" formControlName="sectionName" id="section-name" placeholder="Enter New Section Name"/>
+        </div>
+        <div class="form-group">
+          <label for="section-floor">Floor</label>
+          <input type="text" class="form-control" formControlName="sectionFloor" id="section-floor" placeholder="Enter New Section Floor"/>
+        </div>
+        <div class="form-group">
+          <label for="section-description">Section Description</label>
+          <input type="text" class="form-control" formControlName="sectionDescription" id="section-description" placeholder="Enter New Section Description"/>
+        </div>
+        <div class="center-container">
+          <button [disabled]="!newSectionForm.valid" type="submit" class="btn btn-primary login-btn " data-toggle="modal" data-target="#exampleModal">
+            Add New Section
+          </button>
+        </div>
+      </form>
+    </div>
+  }
+</div>
