@@ -15,6 +15,9 @@
           Tasks
         </h5>
         <ul class="list-unstyled">
+          @for(task of sectionsService.getTasks(); track task.sectionId ) {
+            <li class="mb-2 px-3">{{task.text}} <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
+          }
           <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
           <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
           <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
@@ -39,22 +42,37 @@
     </div>
   </div>
 </div>
-<div class="row mt-5">
-  <form>
-    <div class="form-group">
-      <label for="section-id">Section id</label>
-      <input disabled id="task-name" value="5"/>
-    </div>
-    <div class="form-group">
-      <label for="task-name">Task Name</label>
-      <input id="task-name"/>
-    </div>
-    <div class="form-group">
-      <p>Recurring?</p>
-      <input type="radio" id="yes" name="yes"/>
-      <label for="yes">Yes</label>
-      <input type="radio" id="no" name="no"/>
-      <label for="no">No</label>
-    </div>
-  </form>
+<div class="row my-5">
+  <div class="col-md-12">
+    <form [formGroup]="taskForm" (ngSubmit)="taskSubmit()">
+      <div class="mb-3">
+        <label for="section-id">Section id</label>
+        <input class="form-control" disabled id="task-name" value="{{sectionObject?.id}}"/>
+      </div>
+      <div class="mb-3">
+        <label for="task-name">Task Name</label>
+        <input class="form-control" formControlName="taskName" id="task-name"/>
+      </div>
+      <div class="mb-3">
+        <p class="form-label">Recurring?</p>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="yes" formControlName="recurring" name="recurring" value="yes"/>
+          <label for="yes">Yes</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="no" formControlName="recurring" name="recurring" value="no"/>
+          <label for="no">No</label>
+        </div>
+      </div>
+      @if(showIntervalField) {
+        <div class="mb-3">
+          <label for="task-interval">Task Interval (Days)</label>
+          <input class="form-control" formControlName="interval" id="task-name"/>
+        </div>
+      }
+      <div class="d-flex justify-content-center">
+        <button [disabled]="!this.taskForm.valid" type="submit" class="btn btn-primary">Add Task</button>
+      </div>
+    </form>
+  </div>
 </div>
