@@ -8,35 +8,48 @@
   </div>
 </div>
 <div class="row mt-5">
-  <div class="col-md-6 col-sm-12 d-flex justify-content-center">
-    <div class="card">
+  <div class="col-md-6 col-sm-12 d-flex justify-content-center w-50">
+    <div class="card tasks-card">
       <div class="card-body">
         <h5 class="card-title text-center mb-3">
           Tasks
         </h5>
+        @if(sectionsService.getTasks().length === 0) {
+          <p class="text-center">No tasks</p>
+        }
         <ul class="list-unstyled">
-          @for(task of sectionsService.getTasks(); track task.sectionId ) {
-            <li class="mb-2 px-3">{{task.text}} <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
+          @for(task of sectionsService.getTasksBySection(this.sectionObject?.id || 1); track task.id ) {
+            @if(task.status === 'incomplete') {
+              <li class="mb-2 px-3">{{task.text}} <button (click)="markComplete(task.id)" class="btn btn-sm btn-success ms-3">Complete</button> </li>
+            } @else if(task.status === 'removing') {
+              <li class="mb-2 px-3 fade-out">{{task.text}} <button (click)="markComplete(task.id)" disabled class="btn btn-sm btn-success ms-3">Complete</button> </li>
+            }
           }
-          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
-          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
-          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
-          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
         </ul>
       </div>
     </div>
   </div>
   <div class="col-md-6 col-sm-12 d-flex justify-content-center">
-    <div class="card">
+    <div class="card tasks-card">
       <div class="card-body">
         <h5 class="card-title text-center mb-3">
           Recurring Tasks
         </h5>
+        @if(sectionsService.getTasks().length === 0) {
+          <p class="text-center">No tasks</p>
+        }
         <ul class="list-unstyled">
-          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
-          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
-          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
-          <li class="mb-2 px-3">Task <button class="btn btn-sm btn-success ms-3">Complete</button> </li>
+          @for(task of sectionsService.getTasksBySection(this.sectionObject?.id || 1, true); track task.id ) {
+            @if(task.status === 'incomplete') {
+              <li class="mb-2 px-3">{{task.text}} <button (click)="markComplete(task.id)" class="btn btn-sm btn-success ms-3">Complete</button>
+                <p class="frequency-text">Repeat every {{task.frequency}} days</p>
+              </li>
+            } @else if(task.status === 'removing') {
+              <li class="mb-2 px-3 fade-out">{{task.text}} <button (click)="markComplete(task.id)" disabled class="btn btn-sm btn-success ms-3">Complete</button>
+                <p class="frequency-text">Repeat every {{task.frequency}} days</p>
+               </li>
+            }
+          }
         </ul>
       </div>
     </div>

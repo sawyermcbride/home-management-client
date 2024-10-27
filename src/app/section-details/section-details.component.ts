@@ -2,6 +2,7 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { NewSectionFormType } from '../../interfaces/forms.interface';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SectionsService } from '../sections.service';
+import { Task } from '../../interfaces/objects.interface';
 
 @Component({
   selector: 'app-section-details',
@@ -22,14 +23,30 @@ export class SectionDetailsComponent {
   taskSubmit() {
     const values = this.taskForm.value;
     console.log(this.taskForm.value);
-    this.sectionsService.addTask({...values, id: this.sectionsService.getTasks().length + 1});
+
+    const newTask: Task = {
+      id: this.sectionsService.getTasks().length + 1,
+      text: values.taskName,
+      recurring: values.recurring === 'yes',
+      sectionId: this.sectionObject?.id || 0,
+      frequency: Number.parseInt(values.interval) || 0,
+      status: 'incomplete',
+      createdAt: new Date().getTime()
+    }
+
+    this.sectionsService.addTask(newTask);
 
     console.log(this.sectionsService.getTasks());
     this.taskForm.reset();
   }
 
+  markComplete(id: number) {
+    console.log('Marking task complete: ', id);
+    this.sectionsService.taskComplete(id);
+  }
+
   returnSection() {
-    console.log("Back section");
+
     this.backSectionEvent.emit(true);
   }
 

@@ -1,3 +1,16 @@
 .section-details-card {
   margin-top: 15px;
 }
+
+.tasks-card {
+  min-width: 250px;
+}
+
+.frequency-text {
+  font-size: 12px;
+}
+
+.fade-out {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}

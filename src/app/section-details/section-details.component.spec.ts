@@ -20,4 +20,8 @@ describe('SectionDetailsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render no tasks on render', () => {
+
+  })
 });

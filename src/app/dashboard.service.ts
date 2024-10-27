@@ -6,12 +6,8 @@ import { NewSectionFormType } from '../interfaces/forms.interface';
   providedIn: 'root'
 })
 export class DashboardService {
-  private sectionsCountSource: number = 0;
-  private sections: NewSectionFormType[] = [];
 
-  setCount(count: number) {
-    this.sectionsCountSource = count;
-  }
+  private sections: NewSectionFormType[] = [];
 
   addSection(section: NewSectionFormType) {
     this.sections.push(section);
